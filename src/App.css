@@ -1,38 +1,378 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #FFF5F7;
+  /* Very light pink background */
+  min-height: 100vh;
+  display: flex;
+  /* Added for sticky footer */
+  flex-direction: column;
+  /* Added for sticky footer */
+  border: 15px double #F4C2D8;
+  /* Thicker, gentle pink double border for the whole app */
+  box-sizing: border-box;
+  /* Ensure border doesn't add to overall width/height unexpectedly */
+  color: #5C3C4C;
+  /* Muted dark mauve for default text */
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #FADADD;
+  /* Soft, light pink header */
+  padding: 20px;
+  color: #4A274A;
+  /* Darker plum for header text for contrast */
+  margin-bottom: 20px;
+}
+
+.App-header h1 {
+  margin: 0 0 20px 0;
+}
+
+.search-form {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* Allow items to wrap on smaller screens */
 }
 
-.App-link {
-  color: #61dafb;
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #F4C2D8;
+  /* Gentle pink border */
+  border-radius: 4px;
+  width: 100%;
+  /* Make input full width in flex container */
+  background-color: #FFFFFF;
+  color: #5C3C4C;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.search-input:focus {
+  outline: none;
+  border-color: #E78EA9;
+  /* Match button color for focus */
+  box-shadow: 0 0 0 2px rgba(231, 142, 169, 0.25);
+  /* Soft pink focus ring */
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #E78EA9;
+  /* Medium, warm pink */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+.search-button:hover {
+  background-color: #D1708D;
+  /* Darker shade on hover */
+}
+
+.search-button:active {
+  transform: translateY(1px);
+}
+
+.search-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5), 0 0 0 5px rgba(231, 142, 169, 0.5);
+  /* Double ring for more visibility */
+}
+
+
+.search-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.App-main {
+  padding: 0 20px 20px 20px;
+  flex-grow: 1;
+  /* Added for sticky footer - allows main content to take available space */
+  /* Default padding */
+}
+
+/* Common style for status messages like loading, no results */
+.status-message {
+  font-size: 1.1em;
+  color: #755D67;
+  /* Softer, darker pink-gray */
+  padding: 20px 0;
+  font-style: italic;
+}
+
+.error-message {
+  color: #A3001B;
+  /* Dark red for text */
+  background-color: #FFDDE1;
+  /* Light pinkish-red background */
+  border: 1px solid #F5B0BD;
+  /* Pinkish-red border */
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.warning-message {
+  color: #8B4513;
+  /* Saddle brown for text */
+  background-color: #FFF0E6;
+  /* Very light peach background */
+  border: 1px solid #FFDAB9;
+  /* Peach puff border */
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.movie-card {
+  background-color: #FFFFFF;
+  border: 1px solid #FCEFF2;
+  /* Very light pink border */
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(210, 160, 170, 0.15);
+  /* Softer, pink-tinted shadow */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-align: left;
+}
+
+.movie-card img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.movie-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(210, 160, 170, 0.25);
+  /* Slightly more pronounced shadow on hover */
+}
+
+.movie-card .no-poster {
+  width: 100%;
+  height: 300px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #757575;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.movie-card h3 {
+  font-size: 1.1em;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #C73861;
+  /* Stronger pink for movie titles */
+}
+
+.movie-overview {
+  font-size: 0.9em;
+  color: #755D67;
+  /* Softer, darker pink-gray for overview text */
+  line-height: 1.4;
+}
+
+/* --- Responsive Adjustments --- */
+
+/* For screens smaller than 600px */
+@media (max-width: 600px) {
+  .App-header {
+    padding: 15px;
+    /* Slightly less padding on smaller screens */
   }
-  to {
-    transform: rotate(360deg);
+
+  .App-header h1 {
+    font-size: 1.8em;
+    /* Adjust heading size */
+  }
+
+  .search-form {
+    flex-direction: column;
+    /* Stack input and button vertically */
+    gap: 15px;
+    /* Increase gap when stacked */
+  }
+
+  .App-main {
+    padding: 0 10px 10px 10px;
+    /* Less horizontal padding on very small screens */
+  }
+}
+
+/* --- Footer Styles --- */
+.app-footer {
+  background-color: #FDEFF2;
+  /* Slightly different soft pink for footer */
+  color: #4A274A;
+  /* Darker plum text, consistent with header */
+  padding: 20px 15px;
+  /* Reduced overall footer padding */
+  /* Adjusted padding */
+  text-align: center;
+  border-top: 3px dashed #E78EA9;
+  /* Dashed pink top border for a playful touch */
+  margin-top: auto;
+  /* Pushes footer to the bottom if content is short */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* Reduced gap between sections */
+  /* Increased gap */
+  margin-bottom: 20px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  /* Ensure sections don't get too squished */
+  padding: 10px 15px;
+  /* Reduced padding within sections */
+  /* Increased padding within sections */
+  background-color: rgba(255, 255, 255, 0.3);
+  /* Very subtle white overlay for sections */
+  border-radius: 8px;
+  /* Rounded corners for sections */
+  box-shadow: 0 1px 3px rgba(210, 160, 170, 0.1);
+  /* Softer, lighter shadow for sections */
+}
+
+.footer-section.contact-info p:not(:last-child) {
+  /* Add margin only to paragraphs that are not the last child */
+  margin-bottom: 8px;
+  /* Space between contact lines */
+}
+
+.footer-section h4 {
+  color: #C73861;
+  /* Stronger pink for footer headings */
+  margin-bottom: 15px;
+  /* Slightly more space below heading */
+  font-size: 1.1em;
+  /* Slightly smaller heading */
+  /* Slightly larger heading */
+}
+
+.contact-email {
+  /* Class added to the <p> tag wrapping email */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Center if section is centered */
+  gap: 8px;
+  /* Space between icon and text */
+}
+
+.footer-section p,
+.footer-section a {
+  color: #5C3C4C;
+  /* Muted dark mauve for text and links */
+  text-decoration: none;
+  font-size: 0.9em;
+  /* Slightly smaller text */
+  line-height: 1.5;
+  /* Adjusted line height */
+}
+
+.footer-section a:hover {
+  color: #C73861;
+  /* Pink on hover for links */
+  text-decoration: underline;
+}
+
+.social-links-container {
+  /* Wrapper for social links */
+  display: flex;
+  flex-direction: column;
+  /* Stack links vertically by default */
+  align-items: center;
+  /* Center links if stacked */
+  gap: 10px;
+  /* Reduced gap for social links */
+  /* Space between social links */
+}
+
+.social-media a {
+  /* Styles for individual social media links */
+  display: inline-flex;
+  /* Align icon and text nicely */
+  align-items: center;
+  gap: 10px;
+  /* Slightly increased gap */
+  /* Space between icon and text within the link */
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  font-size: 0.95em;
+  /* Slightly smaller social link text */
+  /* Slightly larger social links */
+  padding: 8px 12px;
+  /* Add padding to make the link area larger */
+  border-radius: 20px;
+  /* Pill-shaped links */
+}
+
+.social-media a svg {
+  /* Target the SVG icons directly */
+  font-size: 1.2em;
+  /* Slightly smaller icons */
+  transition: transform 0.2s ease;
+  /* Make icons a bit larger */
+}
+
+.social-media a:hover {
+  transform: scale(1.1);
+  color: #C73861;
+  /* Ensure hover color is consistent */
+  background-color: rgba(255, 255, 255, 0.7);
+  /* Lighter background on hover */
+  /* Slight zoom effect on hover */
+}
+
+.social-media a:hover svg {
+  transform: rotate(-10deg) scale(1.1);
+  /* Fun little tilt and scale for icon on hover */
+}
+
+.footer-bottom {
+  padding-top: 15px;
+  border-top: 1px solid #FADADD;
+  /* Subtle separator line */
+  font-size: 0.8em;
+  /* Slightly smaller copyright text */
+  color: #755D67;
+}
+
+/* Responsive adjustments for footer if needed */
+@media (min-width: 768px) {
+
+  /* For wider screens, make social links horizontal */
+  .social-links-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    /* Adjusted gap for horizontal layout */
   }
 }
