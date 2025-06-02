@@ -33,6 +33,8 @@
 .movie-detail-content {
     display: flex;
     gap: 30px;
+    margin-bottom: 30px;
+    /* Added to give space before trailer/similar movies */
 }
 
 .movie-detail-poster {
@@ -81,6 +83,7 @@
 }
 
 .movie-detail-info h3 {
+    /* This is for "Overview" */
     margin-top: 25px;
     margin-bottom: 8px;
     font-size: 1.4em;
@@ -101,6 +104,109 @@
     color: #5C3C4C;
     /* Muted dark mauve */
 }
+
+/* --- Embedded Trailer Section --- */
+.embedded-trailer-section {
+    margin-bottom: 30px;
+    /* Space after the embedded trailer */
+}
+
+.embedded-trailer-section h3 {
+    /* For "Trailer" heading */
+    font-size: 1.6em;
+    color: #4A274A;
+    /* Dark plum */
+    margin-bottom: 15px;
+    text-align: left;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #FADADD;
+    /* Light pink underline */
+}
+
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    /* 16:9 Aspect Ratio */
+    position: relative;
+    height: 0;
+    border-radius: 8px;
+    /* Optional: if you want rounded corners for the video player */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: subtle shadow */
+}
+
+.video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+/* --- (Other) Trailers List Section --- */
+.trailers-section {
+    /* This is for "Other Videos" list */
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.trailers-section h4 {
+    /* Changed from h3 to h4 for "Other Videos" */
+    font-size: 1.4em;
+    color: #C73861;
+    /* Stronger pink */
+    border-bottom: 2px solid #FADADD;
+    /* Light pink underline */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.trailers-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.trailers-section li a {
+    color: #4A274A;
+    /* Dark plum */
+    text-decoration: none;
+    display: block;
+    /* Make link take full width for easier clicking */
+    padding: 5px 0;
+    /* Add some padding */
+}
+
+.trailers-section li a:hover {
+    text-decoration: underline;
+    color: #C73861;
+}
+
+
+/* --- Similar Movies Section --- */
+.similar-movies-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    /* A light separator */
+}
+
+.similar-movies-section h3 {
+    font-size: 1.6em;
+    color: #4A274A;
+    /* Dark plum, consistent with header */
+    margin-bottom: 20px;
+    text-align: left;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #FADADD;
+    /* Light pink underline */
+}
+
+/* Ensure MovieList within similar movies section uses the grid */
+.similar-movies-section .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    /* Smaller cards for similar movies */
+}
+
 
 /* Responsive adjustments for detail page */
 @media (max-width: 768px) {
@@ -129,6 +235,13 @@
     .movie-detail-info .tagline {
         text-align: center;
     }
+
+    .embedded-trailer-section h3,
+    .trailers-section h4,
+    .similar-movies-section h3 {
+        text-align: center;
+        /* Center section titles on small screens */
+    }
 }
 
 .status-message.detail-status,
@@ -136,26 +249,4 @@
     text-align: center;
     padding: 40px 20px;
     font-size: 1.2em;
-}
-
-.similar-movies-section {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    /* A light separator */
-}
-
-.similar-movies-section h3 {
-    font-size: 1.6em;
-    color: #4A274A;
-    /* Dark plum, consistent with header */
-    margin-bottom: 20px;
-    text-align: left;
-    /* Or center if you prefer */
-}
-
-/* Ensure MovieList within similar movies section uses the grid */
-.similar-movies-section .movie-list {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    /* Smaller cards for similar movies */
 }

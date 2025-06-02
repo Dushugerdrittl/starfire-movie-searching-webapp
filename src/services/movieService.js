@@ -103,3 +103,23 @@ export const getSimilarMovies = async (movieId, page = 1) => {
         throw error;
     }
 };
+
+export const getMovieVideos = async (movieId) => {
+    if (!API_KEY) {
+        throw new Error('TMDB API key is missing. Please set REACT_APP_TMDB_API_KEY in your .env file and restart the server.');
+    }
+    const url = `${API_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ message: `HTTP error! status: ${response.status}` }));
+            throw new Error(errorData.status_message || `HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data.results || []; // Return all video results
+    } catch (error) {
+        console.error("Error fetching movie videos from service:", error);
+        throw error;
+    }
+};
