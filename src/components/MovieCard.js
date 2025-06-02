@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 
 const MovieCard = ({ movie }) => {
     const imageUrl = movie.poster_path
@@ -8,15 +9,17 @@ const MovieCard = ({ movie }) => {
     const overviewSnippet = movie.overview ? `${movie.overview.substring(0, 100)}...` : 'No overview available.';
 
     return (
-        <div className="movie-card">
-            {imageUrl ? (
-                <img src={imageUrl} alt={movie.title} />
-            ) : (
-                <div className="no-poster">No Poster</div>
-            )}
-            <h3>{movie.title} ({releaseYear})</h3>
-            <p className="movie-overview">{overviewSnippet}</p>
-        </div>
+        <Link to={`/movie/${movie.id}`} className="movie-card-link"> {/* Wrap card content in Link */}
+            <div className="movie-card">
+                {imageUrl ? (
+                    <img src={imageUrl} alt={movie.title} />
+                ) : (
+                    <div className="no-poster">No Poster</div>
+                )}
+                <h3>{movie.title} ({releaseYear})</h3>
+                <p className="movie-overview">{overviewSnippet}</p>
+            </div>
+        </Link>
     );
 };
 

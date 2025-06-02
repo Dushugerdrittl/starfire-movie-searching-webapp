@@ -138,6 +138,16 @@
   justify-content: center;
 }
 
+.movie-card-link {
+  text-decoration: none;
+  /* Remove underline from link */
+  color: inherit;
+  /* Inherit text color from parent */
+  display: block;
+  /* Make the link a block element to properly contain the card */
+}
+
+
 .movie-card {
   background-color: #FFFFFF;
   border: 1px solid #FCEFF2;
@@ -190,6 +200,87 @@
   color: #755D67;
   /* Softer, darker pink-gray for overview text */
   line-height: 1.4;
+}
+
+/* --- Trending Section Styles --- */
+.trending-section {
+  margin-bottom: 30px;
+  /* Space below the trending section */
+}
+
+.trending-section h2 {
+  font-size: 1.8em;
+  color: #C73861;
+  /* Stronger pink for section titles */
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #FADADD;
+  /* Light pink underline */
+}
+
+.upcoming-section {
+  margin-bottom: 30px;
+}
+
+.upcoming-section h2 {
+  font-size: 1.8em;
+  color: #C73861;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #FADADD;
+}
+
+/* --- Pagination Styles --- */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.pagination-controls .pagination-button {
+  padding: 8px 15px;
+  font-size: 0.95em;
+  background-color: #E78EA9;
+  /* Medium, warm pink */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  min-width: 40px;
+  /* Ensure buttons have some minimum width */
+  text-align: center;
+}
+
+.pagination-controls .pagination-button:hover:not(:disabled) {
+  background-color: #D1708D;
+  /* Darker shade on hover */
+}
+
+.pagination-controls .pagination-button:disabled {
+  background-color: #FADADD;
+  /* Lighter pink for disabled */
+  color: #B08490;
+  /* Muted text color for disabled */
+  cursor: not-allowed;
+}
+
+.pagination-controls .pagination-button.active {
+  background-color: #C73861;
+  /* Stronger pink for active page */
+  color: white;
+  font-weight: bold;
+  cursor: default;
+}
+
+.pagination-controls .pagination-ellipsis {
+  padding: 8px 5px;
+  color: #755D67;
+  /* Softer pink-gray */
+  align-self: center;
 }
 
 /* --- Responsive Adjustments --- */

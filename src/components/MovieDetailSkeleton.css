@@ -1,0 +1,117 @@
+.movie-detail-page-skeleton {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* Lighter shadow for skeleton */
+}
+
+.skeleton-line,
+.skeleton-poster-detail,
+.skeleton-back-link {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite linear;
+    /* Reuse existing animation */
+    border-radius: 4px;
+}
+
+.skeleton-back-link {
+    width: 120px;
+    height: 38px;
+    /* Approx height of back link */
+    margin-bottom: 20px;
+}
+
+.movie-detail-content-skeleton {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    /* Space before similar movies skeleton */
+}
+
+.skeleton-poster-detail {
+    width: 300px;
+    height: 450px;
+    /* Match MovieDetailPage poster */
+    flex-shrink: 0;
+}
+
+.movie-detail-info-skeleton {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Space between skeleton lines */
+}
+
+.skeleton-line {
+    height: 16px;
+    /* Default line height */
+    width: 100%;
+}
+
+.skeleton-line.title {
+    height: 30px;
+    /* Taller for title */
+    width: 70%;
+    margin-bottom: 8px;
+}
+
+.skeleton-line.short {
+    width: 50%;
+}
+
+.skeleton-line.medium {
+    width: 80%;
+}
+
+.skeleton-line.long {
+    width: 90%;
+}
+
+.skeleton-line.heading {
+    height: 24px;
+    /* For h3 like "Overview" or "Similar Movies" */
+    width: 40%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+
+.similar-movies-section-skeleton {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    /* Lighter border for skeleton */
+}
+
+
+/* Responsive adjustments for detail page skeleton */
+@media (max-width: 768px) {
+    .movie-detail-content-skeleton {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skeleton-poster-detail {
+        width: 80%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 300 / 450;
+        /* Maintain aspect ratio */
+    }
+}
+
+/* Reusing the keyframes from MovieCardSkeleton.css, ensure it's globally available or copy it here */
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

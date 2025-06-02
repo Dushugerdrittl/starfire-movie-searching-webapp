@@ -1,0 +1,161 @@
+.movie-detail-page {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: #333;
+    /* Darker text for better readability on white */
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #C73861;
+    /* Use a theme color */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: 1px solid #FADADD;
+    /* Light pink border */
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.back-link:hover {
+    background-color: #FDEFF2;
+    /* Light pink background on hover */
+    color: #A3001B;
+    /* Darker pink on hover */
+}
+
+.movie-detail-content {
+    display: flex;
+    gap: 30px;
+}
+
+.movie-detail-poster {
+    width: 300px;
+    /* Fixed width for the poster */
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    /* Prevent poster from shrinking */
+}
+
+.no-poster-detail {
+    width: 300px;
+    height: 450px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #757575;
+    border-radius: 8px;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.movie-detail-info {
+    flex-grow: 1;
+    /* Allow info section to take remaining space */
+}
+
+.movie-detail-info h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 2.2em;
+    color: #4A274A;
+    /* Dark plum, consistent with header */
+}
+
+.movie-detail-info .tagline {
+    font-size: 1.1em;
+    font-style: italic;
+    color: #755D67;
+    /* Softer pink-gray */
+    margin-bottom: 20px;
+}
+
+.movie-detail-info h3 {
+    margin-top: 25px;
+    margin-bottom: 8px;
+    font-size: 1.4em;
+    color: #C73861;
+    /* Stronger pink */
+    border-bottom: 2px solid #FADADD;
+    /* Light pink underline */
+    padding-bottom: 5px;
+}
+
+.movie-detail-info p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.movie-detail-info p strong {
+    color: #5C3C4C;
+    /* Muted dark mauve */
+}
+
+/* Responsive adjustments for detail page */
+@media (max-width: 768px) {
+    .movie-detail-content {
+        flex-direction: column;
+        align-items: center;
+        /* Center items when stacked */
+    }
+
+    .movie-detail-poster,
+    .no-poster-detail {
+        width: 80%;
+        /* Make poster wider on smaller screens */
+        max-width: 300px;
+        /* But not too wide */
+        height: auto;
+        /* Adjust height automatically */
+        max-height: 450px;
+    }
+
+    .movie-detail-info h1 {
+        font-size: 1.8em;
+        text-align: center;
+    }
+
+    .movie-detail-info .tagline {
+        text-align: center;
+    }
+}
+
+.status-message.detail-status,
+.error-message.detail-error {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.2em;
+}
+
+.similar-movies-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    /* A light separator */
+}
+
+.similar-movies-section h3 {
+    font-size: 1.6em;
+    color: #4A274A;
+    /* Dark plum, consistent with header */
+    margin-bottom: 20px;
+    text-align: left;
+    /* Or center if you prefer */
+}
+
+/* Ensure MovieList within similar movies section uses the grid */
+.similar-movies-section .movie-list {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    /* Smaller cards for similar movies */
+}
