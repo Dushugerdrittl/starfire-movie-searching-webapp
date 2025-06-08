@@ -1,0 +1,65 @@
+.search-results-wrapper {
+    /* Diagnostic Styles - Make this container very obvious */
+    display: block !important;
+    /* Ensure it's not display:none */
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 200px !important;
+    /* Give it some space */
+    border: 5px solid darkorchid !important;
+    /* Distinct border color */
+    background-color: rgba(153, 50, 204, 0.1) !important;
+    /* Light orchid background */
+    padding: 20px !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    z-index: 9999 !important;
+    /* Try to bring it to the front */
+}
+
+.search-results-wrapper h2 {
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+/* Ensure MovieList inside SearchResults is also visible */
+.search-results-wrapper .movie-list {
+    display: grid !important;
+    /* Should already be grid from App.css, but enforce */
+    visibility: visible !important;
+    opacity: 1 !important;
+    border: 2px dashed blue !important;
+    padding: 10px;
+    background-color: rgba(0, 0, 255, 0.05);
+}
+
+.search-results-wrapper .movie-list .movie-card-link {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    border: 1px dashed limegreen !important;
+    background-color: rgba(0, 255, 0, 0.05);
+    min-height: 50px !important;
+}
+
+/* Re-add status and error message styling if they are specific to this component
+   or ensure they are globally styled well enough from App.css */
+.search-results-wrapper .status-message {
+    font-size: 1.1em;
+    color: #755D67;
+    padding: 20px 0;
+    font-style: italic;
+    text-align: center;
+}
+
+.search-results-wrapper .error-message {
+    color: #A3001B;
+    background-color: #FFDDE1;
+    border: 1px solid #F5B0BD;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 15px 0;
+    text-align: center;
+}

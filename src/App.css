@@ -95,6 +95,11 @@
   padding: 0 20px 20px 20px;
   flex-grow: 1;
   /* Added for sticky footer - allows main content to take available space */
+  /* --- TEMPORARY DIAGNOSTIC BORDER --- */
+  border: 10px solid limegreen !important;
+  background-color: rgba(50, 205, 50, 0.1) !important;
+  min-height: 50px !important;
+  /* Ensure it has some height for the border to show */
   /* Default padding */
 }
 
@@ -467,3 +472,5 @@
     /* Adjusted gap for horizontal layout */
   }
 }
+
+/* Old diagnostic styles for .search-results-container were here. They are now handled by SearchResults.css for .search-results-wrapper */

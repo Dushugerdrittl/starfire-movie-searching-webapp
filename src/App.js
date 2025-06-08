@@ -5,6 +5,7 @@ import Header from './components/Header';
 import SearchForm from './components/SearchForm';
 import MovieList from './components/MovieList';
 import MovieDetailPage from './components/MovieDetailPage';
+import SearchResults from './components/SearchResults'; // Import the new component
 import Pagination from './components/Pagination';
 import { searchMovies, getTrendingMovies, getUpcomingMovies } from './services/movieService';
 import Footer from './components/Footer';
@@ -45,6 +46,7 @@ function App() {
   }, []);
 
   const fetchMoviesData = useCallback(async (query, page) => {
+    console.log("App fetchMoviesData, received query:", query, "page:", page); // DEBUG
     const searchTerm = query;
     if (!searchTerm) {
       setMovies([]);
@@ -58,18 +60,21 @@ function App() {
       return;
     }
 
+    console.log("App fetchMoviesData, setting currentQuery to:", searchTerm); // DEBUG
     setCurrentQuery(searchTerm);
     setLoading(true);
     setError(null);
-    if (page === 1) {
+    if (page === 1) { // Reset movies only if it's the first page of a new search
       setMovies([]);
     }
 
     try {
       const data = await searchMovies(searchTerm, page);
+      console.log("App fetchMoviesData, data from searchMovies:", data); // DEBUG: Log the raw data
       setMovies(data.results);
       setTotalPages(data.total_pages);
       setCurrentPage(page);
+      console.log("App fetchMoviesData, movies state should be updated. Current movies length:", (data.results || []).length); // DEBUG
     } catch (e) {
       console.error("Error in App during search:", e);
       setError(e.message);
@@ -78,9 +83,10 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, []); // State setters (like setMovies, setCurrentQuery) are stable and don't need to be in useCallback deps if the callback doesn't depend on other changing values from scope.
 
   const handleSearch = (query) => {
+    console.log("App handleSearch, received query:", query); // DEBUG
     fetchMoviesData(query, 1);
   };
 
@@ -93,6 +99,7 @@ function App() {
   // Determine if we are in the initial loading phase for trending/upcoming
   const initialContentLoading = loading && !currentQuery && (trendingMovies.length === 0 || upcomingMovies.length === 0);
 
+  console.log("App render, currentQuery:", currentQuery, "loading:", loading, "initialContentLoading:", initialContentLoading); // DEBUG
   return (
     <Router>
       <div className="App">
@@ -133,16 +140,16 @@ function App() {
 
                 {/* Search Results Section */}
                 {currentQuery && (
-                  <>
-                    <MovieList movies={movies} loading={loading} skeletonCount={10} />
-                    {!loading && !error && movies.length === 0 && (
-                      <p className="status-message">No movies found for "{currentQuery}". Try another search!</p>
-                    )}
-                  </>
+                  <SearchResults
+                    movies={movies}
+                    loading={loading}
+                    error={error}
+                    currentQuery={currentQuery}
+                  />
                 )}
 
-                {/* Initial placeholder message if no search and not loading initial content */}
-                {!loading && !currentQuery && movies.length === 0 && trendingMovies.length === 0 && upcomingMovies.length === 0 && (
+                {/* Initial placeholder message if no search and not loading initial content, and no results from initial fetches */}
+                {!loading && !currentQuery && movies.length === 0 && trendingMovies.length === 0 && upcomingMovies.length === 0 && !trendingError && !upcomingError && (
                   <p className="status-message">Search for movies to see results, or check out what's trending and upcoming!</p>
                 )}
 

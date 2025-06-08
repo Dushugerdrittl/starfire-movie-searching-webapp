@@ -5,6 +5,7 @@ const SearchForm = ({ onSearch, loading }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log("SearchForm handleSubmit, query:", query); // DEBUG
         onSearch(query);
     };
 
